@@ -1,4 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Text.Json;
+using DotNetGitLabWebHook.Model;
+using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace DotNetGitLabWebHook.Controllers
 {
@@ -8,7 +12,7 @@ namespace DotNetGitLabWebHook.Controllers
     {
         [HttpPost]
         [Route("MergeRequest")]
-        public IActionResult MergeRequest(object obj)
+        public IActionResult MergeRequest(GitLabMergeRequest.Rootobject obj)
         {
             return Ok();
         }
