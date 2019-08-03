@@ -12,7 +12,6 @@ namespace DotNetGitLabWebHook.Controllers
     [Route("[controller]")]
     public class GitLabWebHookController : ControllerBase
     {
-
         /// <inheritdoc />
         public GitLabWebHookController(IConfiguration configuration)
         {
@@ -23,14 +22,14 @@ namespace DotNetGitLabWebHook.Controllers
         [Route("MergeRequest")]
         public IActionResult MergeRequest(object obj)
         {
+            // 其实这是在调试 gitlab 发送的值，因为直接转换 GitLabMergeRequest 的值里面有很多不清真的
 
             var str = obj.ToString();
 
+            var rootobject =
+                JsonConvert.DeserializeObject<GitLabMergeRequest.Rootobject>(str);
 
-
-            var rootobject = 
-                    JsonConvert.DeserializeObject<GitLabMergeRequest.Rootobject>(str);
-            if (rootobject.object_kind== "merge_request")
+            if (rootobject.object_kind == "merge_request")
             {
                 var objectAttributes = rootobject.object_attributes;
 
@@ -77,6 +76,5 @@ namespace DotNetGitLabWebHook.Controllers
         }
 
         private readonly IConfiguration _configuration;
-
     }
 }
