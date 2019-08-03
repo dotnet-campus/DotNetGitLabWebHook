@@ -5,6 +5,34 @@ namespace DotNetGitLabWebHook.Model
     // 不清真代码，需要修改属性名
     public class GitLabMergeRequest
     {
+        public MergeRequestProperty CommonProperty { get; set; }
+
+        public Rootobject RawProperty { set; get; }
+
+        public class MergeRequestProperty
+        {
+            public MergeRequestProperty(string sourceGitSshUrl, string sourceBranch, string lastCommitId, string targetGitSshUrl, string targetBranch, string title, string username, string mergeRequestUrl)
+            {
+                SourceGitSshUrl = sourceGitSshUrl;
+                SourceBranch = sourceBranch;
+                LastCommitId = lastCommitId;
+                TargetGitSshUrl = targetGitSshUrl;
+                TargetBranch = targetBranch;
+                Title = title;
+                Username = username;
+                MergeRequestUrl = mergeRequestUrl;
+            }
+
+            public string SourceGitSshUrl { get; }
+            public string SourceBranch { get; }
+            public string LastCommitId { get; }
+            public string TargetGitSshUrl { get; }
+            public string TargetBranch { get; }
+            public string Title { get; }
+            public string Username { get; }
+            public string MergeRequestUrl { get; }
+        }
+
         public class Rootobject
         {
             public string object_kind { get; set; }
