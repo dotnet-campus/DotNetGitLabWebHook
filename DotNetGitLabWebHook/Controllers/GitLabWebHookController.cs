@@ -1,6 +1,8 @@
 ﻿using System.Text.Json;
+using DotNetGitLabWebHook.Business;
 using DotNetGitLabWebHook.Model;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -10,13 +12,27 @@ namespace DotNetGitLabWebHook.Controllers
     [Route("[controller]")]
     public class GitLabWebHookController : ControllerBase
     {
+
+        /// <inheritdoc />
+        public GitLabWebHookController(IConfiguration configuration)
+        {
+            _configuration = configuration;
+        }
+
         [HttpPost]
         [Route("MergeRequest")]
-        public IActionResult MergeRequest(GitLabMergeRequest.Rootobject obj)
+        public IActionResult MergeRequest(object obj)
         {
-            if (obj.object_kind== "merge_request")
+
+            var str = obj.ToString();
+
+
+
+            var rootobject = 
+                    JsonConvert.DeserializeObject<GitLabMergeRequest.Rootobject>(str);
+            if (rootobject.object_kind== "merge_request")
             {
-                var objectAttributes = obj.object_attributes;
+                var objectAttributes = rootobject.object_attributes;
 
                 var sourceGitSshUrl = objectAttributes.source.git_ssh_url;
                 var sourceBranch = objectAttributes.source_branch;
@@ -30,12 +46,12 @@ namespace DotNetGitLabWebHook.Controllers
                 // MR 标题
                 var title = objectAttributes.title;
 
-                var username = obj.user.username;
+                var username = rootobject.user.username;
                 var mergeRequestUrl = objectAttributes.url;
 
                 var gitLabMergeRequest = new GitLabMergeRequest
                 {
-                    RawProperty = obj,
+                    RawProperty = rootobject,
                     CommonProperty = new GitLabMergeRequest.MergeRequestProperty(sourceGitSshUrl,
                         sourceBranch,
                         lastCommitId,
@@ -46,13 +62,21 @@ namespace DotNetGitLabWebHook.Controllers
                         mergeRequestUrl)
                 };
 
+                if (GitLabMRCheckerFlow.Configuration is null)
+                {
+                    GitLabMRCheckerFlow.Configuration = _configuration;
+                }
+
+                GitLabMRCheckerFlow.AddToCheck(gitLabMergeRequest);
+                return Ok();
             }
             else
             {
                 return BadRequest();
             }
-
-            return Ok();
         }
+
+        private readonly IConfiguration _configuration;
+
     }
 }

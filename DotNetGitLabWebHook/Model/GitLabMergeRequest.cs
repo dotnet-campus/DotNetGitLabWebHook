@@ -42,6 +42,7 @@ namespace DotNetGitLabWebHook.Model
             public Object_Attributes object_attributes { get; set; }
             public Label[] labels { get; set; }
             public Changes changes { get; set; }
+            public Assignee[] assignees { get; set; }
         }
 
         public class User
@@ -87,8 +88,8 @@ namespace DotNetGitLabWebHook.Model
             public int? author_id { get; set; }
             public int? assignee_id { get; set; }
             public string title { get; set; }
-            public DateTime created_at { get; set; }
-            public DateTime updated_at { get; set; }
+            public string created_at { get; set; }
+            public string updated_at { get; set; }
             public object milestone_id { get; set; }
             public string state { get; set; }
             public string merge_status { get; set; }
@@ -98,7 +99,7 @@ namespace DotNetGitLabWebHook.Model
             public Source source { get; set; }
             public Target target { get; set; }
             public Last_Commit last_commit { get; set; }
-            public bool work_in_progress { get; set; }
+            public bool? work_in_progress { get; set; }
             public string url { get; set; }
             public string action { get; set; }
             public Assignee assignee { get; set; }
@@ -193,9 +194,9 @@ namespace DotNetGitLabWebHook.Model
             public string title { get; set; }
             public string color { get; set; }
             public int? project_id { get; set; }
-            public DateTime created_at { get; set; }
-            public DateTime updated_at { get; set; }
-            public bool template { get; set; }
+            public string created_at { get; set; }
+            public string updated_at { get; set; }
+            public bool? template { get; set; }
             public string description { get; set; }
             public string type { get; set; }
             public int? group_id { get; set; }
@@ -207,9 +208,9 @@ namespace DotNetGitLabWebHook.Model
             public string title { get; set; }
             public string color { get; set; }
             public int? project_id { get; set; }
-            public DateTime created_at { get; set; }
-            public DateTime updated_at { get; set; }
-            public bool template { get; set; }
+            public string created_at { get; set; }
+            public string updated_at { get; set; }
+            public bool? template { get; set; }
             public string description { get; set; }
             public string type { get; set; }
             public int? group_id { get; set; }
@@ -221,13 +222,15 @@ namespace DotNetGitLabWebHook.Model
             public string title { get; set; }
             public string color { get; set; }
             public int? project_id { get; set; }
-            public DateTime created_at { get; set; }
-            public DateTime updated_at { get; set; }
-            public bool template { get; set; }
+            public string created_at { get; set; }
+            public string updated_at { get; set; }
+            public bool? template { get; set; }
             public string description { get; set; }
             public string type { get; set; }
             public int? group_id { get; set; }
         }
+
+
 
     }
 }
