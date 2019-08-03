@@ -116,7 +116,7 @@ http://你的ip:5006/GitLabWebHook/MergeRequest
 
 ![](http://image.acmx.xyz/lindexi%2F20198317456454)
 
-取消打开 SSL 然后点击添加
+勾选 Merge request events 然后取消打开 SSL 然后点击添加
 
 <!-- ![](image/ASP.NET Core 连接 GitLab 与 MatterMost 打造 devops 工具/ASP.NET Core 连接 GitLab 与 MatterMost 打造 devops 工具6.png) -->
 
