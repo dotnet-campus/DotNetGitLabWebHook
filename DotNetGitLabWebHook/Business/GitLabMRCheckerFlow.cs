@@ -24,7 +24,7 @@ namespace DotNetGitLabWebHookToMatterMost.Business
             var assigneeUsername = string.Join(' ',
                 assigneeList.Where(temp => temp != null).Distinct().Select(temp => $"@{temp}"));
 
-            var text = $"{assigneeUsername} 快来审查代码 {gitLabMergeRequest.CommonProperty.MergeRequestUrl}";
+            var text = $"{assigneeUsername} 快来处理代码 [{gitLabMergeRequest.CommonProperty.Title}]({gitLabMergeRequest.CommonProperty.MergeRequestUrl})";
             Task.Run(() =>
             {
                 var matterMost = new MatterMost(Configuration["MatterMostCodeReviewUrl"]);
