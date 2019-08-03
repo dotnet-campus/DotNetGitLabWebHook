@@ -1,12 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
 using DotNetGitLabWebHook.Model;
+using DotNetGitLabWebHookToMatterMost.Model;
 using Microsoft.Extensions.Configuration;
 
-namespace DotNetGitLabWebHook.Business
+namespace DotNetGitLabWebHookToMatterMost.Business
 {
     public class GitLabMRCheckerFlow
     {
@@ -34,25 +33,5 @@ namespace DotNetGitLabWebHook.Business
         }
 
         public static IConfiguration Configuration { get; set; }
-    }
-
-    public class MatterMost
-    {
-        private readonly string _url;
-
-        /// <inheritdoc />
-        public MatterMost(string url)
-        {
-            _url = url;
-        }
-
-        public void SendText(string text)
-        {
-            var httpClient = new HttpClient();
-            StringContent content = new StringContent("{\"text\": \"" 
-                                                      + text +
-                                                      "\"}", Encoding.UTF8, "application/json");
-            httpClient.PostAsync(_url, content);
-        }
     }
 }

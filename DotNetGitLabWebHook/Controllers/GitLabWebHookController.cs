@@ -1,12 +1,11 @@
-﻿using System.Text.Json;
-using DotNetGitLabWebHook.Business;
-using DotNetGitLabWebHook.Model;
+﻿using DotNetGitLabWebHook.Model;
+using DotNetGitLabWebHookToMatterMost.Business;
+using DotNetGitLabWebHookToMatterMost.Model;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 
-namespace DotNetGitLabWebHook.Controllers
+namespace DotNetGitLabWebHookToMatterMost.Controllers
 {
     [ApiController]
     [Route("[controller]")]

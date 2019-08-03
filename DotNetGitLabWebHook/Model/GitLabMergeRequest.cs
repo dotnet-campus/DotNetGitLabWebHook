@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace DotNetGitLabWebHook.Model
+namespace DotNetGitLabWebHookToMatterMost.Model
 {
     // 不清真代码，需要修改属性名
     public class GitLabMergeRequest
