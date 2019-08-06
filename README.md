@@ -37,7 +37,13 @@
 
 下面让我告诉大家如何使用我这个工具关联你自己的 GitLab 和 Mattermost 工具
 
-首先将这个仓库的代码通过 git clone 下载，然后使用 VisualStudio 2019 打开哦，开发要求如下
+首先在 [github](https://github.com/dotnet-campus/DotNetGitLabWebHook) 将这个仓库的代码通过 git clone 下载，然后使用 VisualStudio 2019 打开哦
+
+```csharp
+git clone git@github.com:dotnet-campus/DotNetGitLabWebHook.git
+```
+
+开发要求如下
 
 - VisualStudio 2019 打开预览版
 - dotnet core 3.0 预览版
@@ -116,7 +122,7 @@ http://你的ip:5006/GitLabWebHook/MergeRequest
 
 ![](http://image.acmx.xyz/lindexi%2F20198317456454)
 
-勾选 Merge request events 然后取消打开 SSL 然后点击添加
+勾选 Merge request events 然后取消打开 SSL 和去掉 Push events 然后点击添加
 
 <!-- ![](image/ASP.NET Core 连接 GitLab 与 MatterMost 打造 devops 工具/ASP.NET Core 连接 GitLab 与 MatterMost 打造 devops 工具6.png) -->
 
