@@ -17,7 +17,17 @@ namespace DotNetGitLabWebHookToMatterMost.Business
         public IConfiguration Configuration { get; set; }
         public void NotifyMatterMost(GitLabMergeRequest gitLabMergeRequest)
         {
+            var state = gitLabMergeRequest.RawProperty.object_attributes.state;
+           
+            // 如果是关闭了，那么不处理
+            if (state == "closed")
+            {
+                return;
+            }
 
+            //var action = gitLabMergeRequest.RawProperty.object_attributes.action;
+            // action 有三个值 update open reopen
+           
             var assignees = gitLabMergeRequest.RawProperty.assignees;
             var assigneeList = new List<string> { gitLabMergeRequest.RawProperty.object_attributes.assignee?.username };
             if (assignees != null)
