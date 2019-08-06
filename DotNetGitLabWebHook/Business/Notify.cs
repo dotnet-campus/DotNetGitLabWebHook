@@ -18,27 +18,38 @@ namespace DotNetGitLabWebHookToMatterMost.Business
         public void NotifyMatterMost(GitLabMergeRequest gitLabMergeRequest)
         {
             var state = gitLabMergeRequest.RawProperty.object_attributes.state;
-           
+
+            string text = "";
+
             // 如果是关闭了，那么不处理
             if (state == "closed")
             {
-                return;
+              
             }
-
-            //var action = gitLabMergeRequest.RawProperty.object_attributes.action;
-            // action 有三个值 update open reopen
-           
-            var assignees = gitLabMergeRequest.RawProperty.assignees;
-            var assigneeList = new List<string> { gitLabMergeRequest.RawProperty.object_attributes.assignee?.username };
-            if (assignees != null)
+            else if (state == "merged")
             {
-                assigneeList.AddRange(assignees.Select(temp => temp.username));
+                var username = gitLabMergeRequest.RawProperty.user.username;
+                text = $"恭喜@{username} [{gitLabMergeRequest.CommonProperty.Title}]({gitLabMergeRequest.CommonProperty.MergeRequestUrl}) 已经合并";
+            }
+            else
+            {
+
+                //var action = gitLabMergeRequest.RawProperty.object_attributes.action;
+                // action 有三个值 update open reopen
+
+                var assignees = gitLabMergeRequest.RawProperty.assignees;
+                var assigneeList = new List<string> { gitLabMergeRequest.RawProperty.object_attributes.assignee?.username };
+                if (assignees != null)
+                {
+                    assigneeList.AddRange(assignees.Select(temp => temp.username));
+                }
+
+                var assigneeUsername = string.Join(' ',
+                    assigneeList.Where(temp => temp != null).Distinct().Select(temp => $"@{temp}"));
+
+                text = $"{assigneeUsername} 快来处理代码 [{gitLabMergeRequest.CommonProperty.Title}]({gitLabMergeRequest.CommonProperty.MergeRequestUrl})";
             }
 
-            var assigneeUsername = string.Join(' ',
-                assigneeList.Where(temp => temp != null).Distinct().Select(temp => $"@{temp}"));
-
-            var text = $"{assigneeUsername} 快来处理代码 [{gitLabMergeRequest.CommonProperty.Title}]({gitLabMergeRequest.CommonProperty.MergeRequestUrl})";
             Task.Run(() =>
             {
                 var matterMost = new MatterMost(Configuration["MatterMostCodeReviewUrl"]);
