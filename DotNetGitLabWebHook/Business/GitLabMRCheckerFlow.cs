@@ -7,25 +7,26 @@ namespace DotNetGitLabWebHookToMatterMost.Business
     public class GitLabMRCheckerFlow
     {
         public Notify Notify { get; }
+        public FileChecker FileChecker { get; }
 
         /// <inheritdoc />
-        public GitLabMRCheckerFlow(Notify notify)
+        public GitLabMRCheckerFlow(Notify notify, FileChecker fileChecker)
         {
             Notify = notify;
+            FileChecker = fileChecker;
         }
 
         // todo 处理并发
         // todo 使用消息队列
 
-        public static void AddToCheck(GitLabMergeRequest gitLabMergeRequest)
+        public void AddToCheck(GitLabMergeRequest gitLabMergeRequest)
         {
-            var notify = new Notify(Configuration);
+            var notify = Notify;
             notify.NotifyMatterMost(gitLabMergeRequest);
 
-            var fileChecker = new FileChecker();
+            var fileChecker = FileChecker;
             fileChecker.Handle(gitLabMergeRequest);
         }
 
-        public static IConfiguration Configuration { get; set; }
     }
 }
