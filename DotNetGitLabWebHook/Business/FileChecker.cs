@@ -9,7 +9,12 @@ namespace DotNetGitLabWebHookToMatterMost.Business
     {
         public void Handle(GitLabMergeRequest gitLabMergeRequest)
         {
+            // 合并到的分支
+            var sourceBranch = gitLabMergeRequest.CommonProperty.SourceBranch;
+            // 合并分支最后的提交
+            var lastCommitId = gitLabMergeRequest.CommonProperty.LastCommitId;
 
+            // 通过这两个值拿到修改的文件
         }
     }
 }

@@ -6,6 +6,14 @@ namespace DotNetGitLabWebHookToMatterMost.Business
 {
     public class GitLabMRCheckerFlow
     {
+        public Notify Notify { get; }
+
+        /// <inheritdoc />
+        public GitLabMRCheckerFlow(Notify notify)
+        {
+            Notify = notify;
+        }
+
         // todo 处理并发
         // todo 使用消息队列
 
