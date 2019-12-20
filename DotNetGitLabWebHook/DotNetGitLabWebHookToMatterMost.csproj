@@ -8,4 +8,8 @@
     <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\lindexi_gd\GitCommand\GitCommand\GitCommand.csproj" />
+  </ItemGroup>
+
 </Project>
