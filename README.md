@@ -3,7 +3,6 @@
 在现代化开发工具链里面就包含了自动化的通讯工具，而日志写代码我是推到 Gitlab 平台上，我今天听了郭锐大佬的分享之后，感觉我现在的团队的自动化做的远远不够。我在他的课程上学到的最重要一句话就是做工具不是从零到一最难，有很多非常厉害好用的工具最后都没用上的原因是没有加入到开发链条上。所以我用最简单的工具做实践，在 Gitlab 上的代码审查每次都需要自己手动将代码审查链接发给对应的审查者，这样的效率很低，于是我就打通了通讯工具和代码平台之间的联系，开始一步步打造适合自己团队的工具
 
 <!--more-->
-<!-- csdn -->
 
 这只是一个简单的工具，下面让我告诉大家做出来的效果
 
@@ -140,4 +139,6 @@ http://你的ip:5006/GitLabWebHook/MergeRequest
 
 嗯，代码现在还在进行优化，关键是将这个工具用起来，十分欢迎大家加入开发
 
-[在 Gitlab 开启 MatterMost 机器人](https://blog.lindexi.com/post/%E5%9C%A8-gitlab-%E5%BC%80%E5%90%AF-mattermost-%E6%9C%BA%E5%99%A8%E4%BA%BA )
+[在 Gitlab 开启 MatterMost 机器人](https://blog.lindexi.com/post/%E5%9C%A8-Gitlab-%E5%BC%80%E5%90%AF-MatterMost-%E6%9C%BA%E5%99%A8%E4%BA%BA.html )
+
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="知识共享许可协议" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br />本作品采用<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a>进行许可。欢迎转载、使用、重新发布，但务必保留文章署名[林德熙](http://blog.csdn.net/lindexi_gd)(包含链接:http://blog.csdn.net/lindexi_gd )，不得用于商业目的，基于本文修改后的作品务必以相同的许可发布。如有任何疑问，请与我[联系](mailto:lindexi_gd@163.com)。
