@@ -1,4 +1,5 @@
 ﻿using DotNetGitLabWebHook.Model;
+using DotNetGitLabWebHookToMatterMost.Business.Check;
 using DotNetGitLabWebHookToMatterMost.Model;
 using Microsoft.Extensions.Configuration;
 
@@ -27,13 +28,5 @@ namespace DotNetGitLabWebHookToMatterMost.Business
         public Notify Notify { get; }
 
         public FileChecker FileChecker { get; }
-    }
-
-    public class FileChecker
-    {
-        public void Check(GitLabMergeRequest gitLabMergeRequest)
-        {
-
-        }
     }
 }
