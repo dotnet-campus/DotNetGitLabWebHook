@@ -11,9 +11,12 @@ namespace DotNetGitLabWebHookToMatterMost.Controllers
     [Route("[controller]")]
     public class GitLabWebHookController : ControllerBase
     {
+        public GitLabMRCheckerFlow GitLabMrCheckerFlow { get; }
+
         /// <inheritdoc />
-        public GitLabWebHookController(IConfiguration configuration)
+        public GitLabWebHookController(IConfiguration configuration, GitLabMRCheckerFlow gitLabMrCheckerFlow)
         {
+            GitLabMrCheckerFlow = gitLabMrCheckerFlow;
             _configuration = configuration;
         }
 
@@ -60,12 +63,7 @@ namespace DotNetGitLabWebHookToMatterMost.Controllers
                         mergeRequestUrl)
                 };
 
-                if (GitLabMRCheckerFlow.Configuration is null)
-                {
-                    GitLabMRCheckerFlow.Configuration = _configuration;
-                }
-
-                GitLabMRCheckerFlow.AddToCheck(gitLabMergeRequest);
+                GitLabMrCheckerFlow.AddToCheck(gitLabMergeRequest);
                 return Ok();
             }
             else

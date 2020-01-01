@@ -9,12 +9,31 @@ namespace DotNetGitLabWebHookToMatterMost.Business
         // todo 处理并发
         // todo 使用消息队列
 
-        public static void AddToCheck(GitLabMergeRequest gitLabMergeRequest)
+        public GitLabMRCheckerFlow(Notify notify, FileChecker fileChecker)
         {
-            var notify = new Notify(Configuration);
-            notify.NotifyMatterMost(gitLabMergeRequest);
+            Notify = notify;
+            FileChecker = fileChecker;
         }
 
-        public static IConfiguration Configuration { get; set; }
+        public void AddToCheck(GitLabMergeRequest gitLabMergeRequest)
+        {
+            var notify = Notify;
+            notify.NotifyMatterMost(gitLabMergeRequest);
+
+            var fileChecker = FileChecker;
+            fileChecker.Check(gitLabMergeRequest);
+        }
+
+        public Notify Notify { get; }
+
+        public FileChecker FileChecker { get; }
+    }
+
+    public class FileChecker
+    {
+        public void Check(GitLabMergeRequest gitLabMergeRequest)
+        {
+
+        }
     }
 }

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using DotNetGitLabWebHookToMatterMost.Business;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -25,6 +26,9 @@ namespace DotNetGitLabWebHook
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddScoped<GitLabMRCheckerFlow>();
+            services.AddScoped<Notify>();
+            services.AddScoped<FileChecker>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
