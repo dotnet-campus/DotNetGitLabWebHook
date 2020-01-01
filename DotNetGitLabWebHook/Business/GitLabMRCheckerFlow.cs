@@ -13,8 +13,19 @@ namespace DotNetGitLabWebHookToMatterMost.Business
         {
             var notify = new Notify(Configuration);
             notify.NotifyMatterMost(gitLabMergeRequest);
+
+            var fileChecker = new FileChecker();
+            fileChecker.Check(gitLabMergeRequest);
         }
 
         public static IConfiguration Configuration { get; set; }
+    }
+
+    public class FileChecker
+    {
+        public void Check(GitLabMergeRequest gitLabMergeRequest)
+        {
+
+        }
     }
 }
