@@ -29,6 +29,7 @@ namespace DotNetGitLabWebHookToMatterMost.Business.Check
             return new DirectoryInfo(folder);
         }
 
+        //todo 上层保证相同的地址每次只会进入一次
         public DirectoryInfo GetRepo(string repositoryUrl, string name)
         {
             // 找到本地仓库
