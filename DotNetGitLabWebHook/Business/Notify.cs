@@ -14,7 +14,7 @@ namespace DotNetGitLabWebHookToMatterMost.Business
             Configuration = configuration;
         }
 
-        public IConfiguration Configuration { get; set; }
+        public IConfiguration Configuration { get; }
         public void NotifyMatterMost(GitLabMergeRequest gitLabMergeRequest)
         {
             var state = gitLabMergeRequest.RawProperty.object_attributes.state;
@@ -24,7 +24,7 @@ namespace DotNetGitLabWebHookToMatterMost.Business
             // 如果是关闭了，那么不处理
             if (state == "closed")
             {
-              
+
             }
             else if (state == "merged")
             {
