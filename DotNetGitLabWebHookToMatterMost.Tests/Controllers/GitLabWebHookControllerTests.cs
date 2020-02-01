@@ -19,7 +19,7 @@ namespace DotNetGitLabWebHookToMatterMost.Controllers.Tests
         [TestMethod()]
         public void MergeRequestTest()
         {
-            var hostBuilder = CreateHostBuilder(new string[0]);
+            var hostBuilder = Program.CreateHostBuilder(new string[0]);
             var build = hostBuilder.Build();
             var serviceProvider = build.Services;
             
@@ -31,14 +31,6 @@ namespace DotNetGitLabWebHookToMatterMost.Controllers.Tests
                 gitLabWebHookController.MergeRequest(TestMRJson.GetObject());
             }
         }
-
-        public static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(webBuilder =>
-                {
-                    webBuilder.UseStartup<Startup>();
-                    webBuilder.UseUrls("http://0.0.0.0:6000");
-                });
     }
 
     public class TestMRJson
