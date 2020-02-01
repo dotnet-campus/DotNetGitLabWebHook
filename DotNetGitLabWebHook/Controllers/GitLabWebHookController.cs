@@ -14,12 +14,12 @@ namespace DotNetGitLabWebHookToMatterMost.Controllers
         public GitLabMRCheckerFlow GitLabMrCheckerFlow { get; }
 
         /// <inheritdoc />
-        public GitLabWebHookController(IConfiguration configuration, GitLabMRCheckerFlow gitLabMrCheckerFlow)
+        public GitLabWebHookController(GitLabMRCheckerFlow gitLabMrCheckerFlow)
         {
             GitLabMrCheckerFlow = gitLabMrCheckerFlow;
-            _configuration = configuration;
         }
 
+        
         [HttpPost]
         [Route("MergeRequest")]
         public IActionResult MergeRequest(object obj)
@@ -72,6 +72,5 @@ namespace DotNetGitLabWebHookToMatterMost.Controllers
             }
         }
 
-        private readonly IConfiguration _configuration;
     }
 }
