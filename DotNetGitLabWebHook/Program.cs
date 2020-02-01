@@ -15,35 +15,6 @@ namespace DotNetGitLabWebHook
     {
         public static void Main(string[] args)
         {
-            var sourceGitSshUrl = "git@gitlab.gz.cvte.cn:lindexi/faljayrarwemwarwhefairberelejeaku.git";
-            var sourceBranch = "banelaceajayJechemkile";
-
-            // 最后提交号
-            var lastCommitId = "75ca2bf8452061c8b44e6845993ac76c650dad2a";
-
-            var targetGitSshUrl = "git@gitlab.gz.cvte.cn:lindexi/faljayrarwemwarwhefairberelejeaku.git";
-            var targetBranch = "master";
-
-            // MR 标题
-            var title = "LaihechaliNellabemdo";
-
-            var username = "lindexi";
-            var mergeRequestUrl = "https://gitlab.gz.cvte.cn/lindexi/faljayrarwemwarwhefairberelejeaku/merge_requests/1";
-
-            var gitLabMergeRequest = new GitLabMergeRequest
-            {
-                CommonProperty = new GitLabMergeRequest.MergeRequestProperty(sourceGitSshUrl,
-                    sourceBranch,
-                    lastCommitId,
-                    targetGitSshUrl,
-                    targetBranch,
-                    title,
-                    username,
-                    mergeRequestUrl)
-            };
-
-
-
             CreateHostBuilder(args).Build().Run();
         }
 
