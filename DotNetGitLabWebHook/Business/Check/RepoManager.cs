@@ -15,12 +15,14 @@ namespace DotNetGitLabWebHookToMatterMost.Business.Check
             Configuration = configuration;
         }
 
+        public const string RepoFolderConfiguration = "RepoFolder";
+
         private DirectoryInfo GetRepoFolder()
         {
-            var folder = Configuration["RepoFolder"];
+            var folder = Configuration[RepoFolderConfiguration];
             if (string.IsNullOrEmpty(folder))
             {
-                folder = "RepoFolder";
+                folder = RepoFolderConfiguration;
             }
 
             Directory.CreateDirectory(folder);
