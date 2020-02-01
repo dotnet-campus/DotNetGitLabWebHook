@@ -23,7 +23,7 @@ namespace DotNetGitLabWebHook
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
-                    webBuilder.UseUrls("http://0.0.0.0:5006");
+                    webBuilder.UseUrls("http://0.0.0.0:6000");
                 });
     }
 }
