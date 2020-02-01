@@ -9,6 +9,9 @@ namespace DotNetGitLabWebHookToMatterMost.Model
 
         public Rootobject RawProperty { set; get; }
 
+        /// <summary>
+        /// 常用的属性
+        /// </summary>
         public class MergeRequestProperty
         {
             public MergeRequestProperty(string sourceGitSshUrl, string sourceBranch, string lastCommitId, string targetGitSshUrl, string targetBranch, string title, string username, string mergeRequestUrl)
