@@ -1,5 +1,4 @@
-﻿using DotNetGitLabWebHook.Model;
-using DotNetGitLabWebHookToMatterMost.Business;
+﻿using DotNetGitLabWebHookToMatterMost.Business;
 using DotNetGitLabWebHookToMatterMost.Model;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -31,24 +30,24 @@ namespace DotNetGitLabWebHookToMatterMost.Controllers
             var rootobject =
                 JsonConvert.DeserializeObject<GitLabMergeRequest.Rootobject>(str);
 
-            if (rootobject.object_kind == "merge_request")
+            if (rootobject.ObjectKind == "merge_request")
             {
-                var objectAttributes = rootobject.object_attributes;
+                var objectAttributes = rootobject.ObjectAttributes;
 
-                var sourceGitSshUrl = objectAttributes.source.git_ssh_url;
-                var sourceBranch = objectAttributes.source_branch;
+                var sourceGitSshUrl = objectAttributes.Source.GitSshUrl;
+                var sourceBranch = objectAttributes.SourceBranch;
 
                 // 最后提交号
-                var lastCommitId = objectAttributes.last_commit.id;
+                var lastCommitId = objectAttributes.LastCommit.Id;
 
-                var targetGitSshUrl = objectAttributes.target.git_ssh_url;
-                var targetBranch = objectAttributes.target_branch;
+                var targetGitSshUrl = objectAttributes.Target.GitSshUrl;
+                var targetBranch = objectAttributes.TargetBranch;
 
                 // MR 标题
-                var title = objectAttributes.title;
+                var title = objectAttributes.Title;
 
-                var username = rootobject.user.username;
-                var mergeRequestUrl = objectAttributes.url;
+                var username = rootobject.User.Username;
+                var mergeRequestUrl = objectAttributes.Url;
 
                 var gitLabMergeRequest = new GitLabMergeRequest
                 {
