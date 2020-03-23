@@ -1,10 +1,15 @@
 ﻿using System;
+using Newtonsoft.Json;
 
 namespace DotNetGitLabWebHookToMatterMost.Model
 {
-    // 不清真代码，需要修改属性名
     public class GitLabMergeRequest
     {
+        // 通过 https://github.com/yinghualuowu/JsonModelConvert.git 优化命名
+
+        /// <summary>
+        /// 通用的属性
+        /// </summary>
         public MergeRequestProperty CommonProperty { get; set; }
 
         public Rootobject RawProperty { set; get; }
@@ -14,7 +19,8 @@ namespace DotNetGitLabWebHookToMatterMost.Model
         /// </summary>
         public class MergeRequestProperty
         {
-            public MergeRequestProperty(string sourceGitSshUrl, string sourceBranch, string lastCommitId, string targetGitSshUrl, string targetBranch, string title, string username, string mergeRequestUrl)
+            public MergeRequestProperty(string sourceGitSshUrl, string sourceBranch, string lastCommitId,
+                string targetGitSshUrl, string targetBranch, string title, string username, string mergeRequestUrl)
             {
                 SourceGitSshUrl = sourceGitSshUrl;
                 SourceBranch = sourceBranch;
@@ -38,202 +44,537 @@ namespace DotNetGitLabWebHookToMatterMost.Model
 
         public class Rootobject
         {
-            public string object_kind { get; set; }
-            public User user { get; set; }
-            public Project project { get; set; }
-            public Repository repository { get; set; }
-            public Object_Attributes object_attributes { get; set; }
-            public Label[] labels { get; set; }
-            public Changes changes { get; set; }
-            public Assignee[] assignees { get; set; }
+            /// <summary>
+            /// 
+            /// </summary>
+            [JsonProperty("object_kind")]
+            public string ObjectKind { get; set; }
+
+            /// <summary>
+            /// 
+            /// </summary>
+            [JsonProperty("user")]
+            public User User { get; set; }
+
+            /// <summary>
+            /// 
+            /// </summary>
+            [JsonProperty("project")]
+            public Project Project { get; set; }
+
+            /// <summary>
+            /// 
+            /// </summary>
+            [JsonProperty("repository")]
+            public Repository Repository { get; set; }
+
+            /// <summary>
+            /// 
+            /// </summary>
+            [JsonProperty("object_attributes")]
+            public ObjectAttributes ObjectAttributes { get; set; }
+
+            /// <summary>
+            /// 
+            /// </summary>
+            [JsonProperty("labels")]
+            public Label[] Labels { get; set; }
+
+            /// <summary>
+            /// 
+            /// </summary>
+            [JsonProperty("changes")]
+            public Changes Changes { get; set; }
+
+            /// <summary>
+            /// 
+            /// </summary>
+            [JsonProperty("assignees")]
+            public Assignee[] Assignees { get; set; }
         }
 
         public class User
         {
-            public string name { get; set; }
-            public string username { get; set; }
-            public string avatar_url { get; set; }
+            /// <summary>
+            /// 
+            /// </summary>
+            [JsonProperty("name")]
+            public string Name { get; set; }
+
+            /// <summary>
+            /// 
+            /// </summary>
+            [JsonProperty("username")]
+            public string Username { get; set; }
+
+            /// <summary>
+            /// 
+            /// </summary>
+            [JsonProperty("avatar_url")]
+            public string AvatarUrl { get; set; }
         }
 
         public class Project
         {
-            public int? id { get; set; }
-            public string name { get; set; }
-            public string description { get; set; }
-            public string web_url { get; set; }
-            public object avatar_url { get; set; }
-            public string git_ssh_url { get; set; }
-            public string git_http_url { get; set; }
-            public string _namespace { get; set; }
-            public int? visibility_level { get; set; }
-            public string path_with_namespace { get; set; }
-            public string default_branch { get; set; }
-            public string homepage { get; set; }
-            public string url { get; set; }
-            public string ssh_url { get; set; }
-            public string http_url { get; set; }
+            /// <summary>
+            /// 
+            /// </summary>
+            [JsonProperty("name")]
+            public string Name { get; set; }
+
+            /// <summary>
+            /// 
+            /// </summary>
+            [JsonProperty("description")]
+            public string Description { get; set; }
+
+            /// <summary>
+            /// 
+            /// </summary>
+            [JsonProperty("web_url")]
+            public string WebUrl { get; set; }
+
+            /// <summary>
+            /// 
+            /// </summary>
+            [JsonProperty("avatar_url")]
+            public object AvatarUrl { get; set; }
+
+            /// <summary>
+            /// 
+            /// </summary>
+            [JsonProperty("git_ssh_url")]
+            public string GitSshUrl { get; set; }
+
+            /// <summary>
+            /// 
+            /// </summary>
+            [JsonProperty("git_http_url")]
+            public string GitHttpUrl { get; set; }
+
+            /// <summary>
+            /// 
+            /// </summary>
+            [JsonProperty("_namespace")]
+            public string Namespace { get; set; }
+
+            /// <summary>
+            /// 
+            /// </summary>
+            [JsonProperty("visibility_level")]
+            public int? VisibilityLevel { get; set; }
+
+            /// <summary>
+            /// 
+            /// </summary>
+            [JsonProperty("path_with_namespace")]
+            public string PathWithNamespace { get; set; }
+
+            /// <summary>
+            /// 
+            /// </summary>
+            [JsonProperty("default_branch")]
+            public string DefaultBranch { get; set; }
+
+            /// <summary>
+            /// 
+            /// </summary>
+            [JsonProperty("homepage")]
+            public string Homepage { get; set; }
+
+            /// <summary>
+            /// 
+            /// </summary>
+            [JsonProperty("url")]
+            public string Url { get; set; }
+
+            /// <summary>
+            /// 
+            /// </summary>
+            [JsonProperty("ssh_url")]
+            public string SshUrl { get; set; }
+
+            /// <summary>
+            /// 
+            /// </summary>
+            [JsonProperty("http_url")]
+            public string HttpUrl { get; set; }
         }
 
         public class Repository
         {
-            public string name { get; set; }
-            public string url { get; set; }
-            public string description { get; set; }
-            public string homepage { get; set; }
+            /// <summary>
+            /// 
+            /// </summary>
+            [JsonProperty("name")]
+            public string Name { get; set; }
+
+            /// <summary>
+            /// 
+            /// </summary>
+            [JsonProperty("url")]
+            public string Url { get; set; }
+
+            /// <summary>
+            /// 
+            /// </summary>
+            [JsonProperty("description")]
+            public string Description { get; set; }
+
+            /// <summary>
+            /// 
+            /// </summary>
+            [JsonProperty("homepage")]
+            public string Homepage { get; set; }
         }
 
-        public class Object_Attributes
+        public class ObjectAttributes
         {
-            public int? id { get; set; }
-            public string target_branch { get; set; }
-            public string source_branch { get; set; }
-            public int? source_project_id { get; set; }
-            public int? author_id { get; set; }
-            public int? assignee_id { get; set; }
-            public string title { get; set; }
-            public string created_at { get; set; }
-            public string updated_at { get; set; }
-            public object milestone_id { get; set; }
-            public string state { get; set; }
-            public string merge_status { get; set; }
-            public int? target_project_id { get; set; }
-            public int? iid { get; set; }
-            public string description { get; set; }
-            public Source source { get; set; }
-            public Target target { get; set; }
-            public Last_Commit last_commit { get; set; }
-            public bool? work_in_progress { get; set; }
-            public string url { get; set; }
-            public string action { get; set; }
-            public Assignee assignee { get; set; }
+            /// <summary>
+            /// 
+            /// </summary>
+            [JsonProperty("id")]
+            public int? Id { get; set; }
+
+            /// <summary>
+            /// 
+            /// </summary>
+            [JsonProperty("target_branch")]
+            public string TargetBranch { get; set; }
+
+            /// <summary>
+            /// 
+            /// </summary>
+            [JsonProperty("source_branch")]
+            public string SourceBranch { get; set; }
+
+            /// <summary>
+            /// 
+            /// </summary>
+            [JsonProperty("source_project_id")]
+            public int? SourceProjectId { get; set; }
+
+            /// <summary>
+            /// 
+            /// </summary>
+            [JsonProperty("author_id")]
+            public int? AuthorId { get; set; }
+
+            /// <summary>
+            /// 
+            /// </summary>
+            [JsonProperty("assignee_id")]
+            public int? AssigneeId { get; set; }
+
+            /// <summary>
+            /// 
+            /// </summary>
+            [JsonProperty("title")]
+            public string Title { get; set; }
+
+            /// <summary>
+            /// 
+            /// </summary>
+            [JsonProperty("created_at")]
+            public string CreatedAt { get; set; }
+
+            /// <summary>
+            /// 
+            /// </summary>
+            [JsonProperty("updated_at")]
+            public string UpdatedAt { get; set; }
+
+            /// <summary>
+            /// 
+            /// </summary>
+            [JsonProperty("milestone_id")]
+            public object MilestoneId { get; set; }
+
+            /// <summary>
+            /// 
+            /// </summary>
+            [JsonProperty("state")]
+            public string State { get; set; }
+
+            /// <summary>
+            /// 
+            /// </summary>
+            [JsonProperty("merge_status")]
+            public string MergeStatus { get; set; }
+
+            /// <summary>
+            /// 
+            /// </summary>
+            [JsonProperty("target_project_id")]
+            public int? TargetProjectId { get; set; }
+
+            /// <summary>
+            /// 
+            /// </summary>
+            [JsonProperty("iid")]
+            public int? Iid { get; set; }
+
+            /// <summary>
+            /// 
+            /// </summary>
+            [JsonProperty("description")]
+            public string Description { get; set; }
+
+            /// <summary>
+            /// 
+            /// </summary>
+            [JsonProperty("source")]
+            public Source Source { get; set; }
+
+            /// <summary>
+            /// 
+            /// </summary>
+            [JsonProperty("target")]
+            public Target Target { get; set; }
+
+            /// <summary>
+            /// 
+            /// </summary>
+            [JsonProperty("last_commit")]
+            public LastCommit LastCommit { get; set; }
+
+            /// <summary>
+            /// 
+            /// </summary>
+            [JsonProperty("work_in_progress")]
+            public bool? WorkInProgress { get; set; }
+
+            /// <summary>
+            /// 
+            /// </summary>
+            [JsonProperty("url")]
+            public string Url { get; set; }
+
+            /// <summary>
+            /// 
+            /// </summary>
+            [JsonProperty("action")]
+            public string Action { get; set; }
+
+            /// <summary>
+            /// 
+            /// </summary>
+            [JsonProperty("assignee")]
+            public Assignee Assignee { get; set; }
         }
 
-        public class Source
+        public class Source : Project
         {
-            public string name { get; set; }
-            public string description { get; set; }
-            public string web_url { get; set; }
-            public object avatar_url { get; set; }
-            public string git_ssh_url { get; set; }
-            public string git_http_url { get; set; }
-            public string _namespace { get; set; }
-            public int visibility_level { get; set; }
-            public string path_with_namespace { get; set; }
-            public string default_branch { get; set; }
-            public string homepage { get; set; }
-            public string url { get; set; }
-            public string ssh_url { get; set; }
-            public string http_url { get; set; }
         }
 
-        public class Target
+        public class Target : Project
         {
-            public string name { get; set; }
-            public string description { get; set; }
-            public string web_url { get; set; }
-            public object avatar_url { get; set; }
-            public string git_ssh_url { get; set; }
-            public string git_http_url { get; set; }
-            public string _namespace { get; set; }
-            public int? visibility_level { get; set; }
-            public string path_with_namespace { get; set; }
-            public string default_branch { get; set; }
-            public string homepage { get; set; }
-            public string url { get; set; }
-            public string ssh_url { get; set; }
-            public string http_url { get; set; }
         }
 
-        public class Last_Commit
+        public class LastCommit
         {
-            public string id { get; set; }
-            public string message { get; set; }
-            public DateTime timestamp { get; set; }
-            public string url { get; set; }
-            public Author author { get; set; }
+            /// <summary>
+            /// 
+            /// </summary>
+            [JsonProperty("id")]
+            public string Id { get; set; }
+
+            /// <summary>
+            /// 
+            /// </summary>
+            [JsonProperty("message")]
+            public string Message { get; set; }
+
+            /// <summary>
+            /// 
+            /// </summary>
+            [JsonProperty("timestamp")]
+            public DateTime Timestamp { get; set; }
+
+            /// <summary>
+            /// 
+            /// </summary>
+            [JsonProperty("url")]
+            public string Url { get; set; }
+
+            /// <summary>
+            /// 
+            /// </summary>
+            [JsonProperty("author")]
+            public Author Author { get; set; }
         }
 
         public class Author
         {
-            public string name { get; set; }
-            public string email { get; set; }
+            /// <summary>
+            /// 
+            /// </summary>
+            [JsonProperty("name")]
+            public string Name { get; set; }
+
+            /// <summary>
+            /// 
+            /// </summary>
+            [JsonProperty("email")]
+            public string Email { get; set; }
         }
 
         public class Assignee
         {
-            public string name { get; set; }
-            public string username { get; set; }
-            public string avatar_url { get; set; }
+            /// <summary>
+            /// 
+            /// </summary>
+            [JsonProperty("name")]
+            public string Name { get; set; }
+
+            /// <summary>
+            /// 
+            /// </summary>
+            [JsonProperty("username")]
+            public string Username { get; set; }
+
+            /// <summary>
+            /// 
+            /// </summary>
+            [JsonProperty("avatar_url")]
+            public string AvatarUrl { get; set; }
         }
 
         public class Changes
         {
-            public Updated_By_Id updated_by_id { get; set; }
-            public Updated_At updated_at { get; set; }
-            public Labels labels { get; set; }
+            /// <summary>
+            /// 
+            /// </summary>
+            [JsonProperty("updated_by_id")]
+            public UpdatedById UpdatedById { get; set; }
+
+            /// <summary>
+            /// 
+            /// </summary>
+            [JsonProperty("updated_at")]
+            public UpdatedAt UpdatedAt { get; set; }
+
+            /// <summary>
+            /// 
+            /// </summary>
+            [JsonProperty("labels")]
+            public Labels Labels { get; set; }
         }
 
-        public class Updated_By_Id
+        public class UpdatedById
         {
-            public object previous { get; set; }
-            public int? current { get; set; }
+            /// <summary>
+            /// 
+            /// </summary>
+            [JsonProperty("previous")]
+            public object Previous { get; set; }
+
+            /// <summary>
+            /// 
+            /// </summary>
+            [JsonProperty("current")]
+            public int? Current { get; set; }
         }
 
-        public class Updated_At
+        public class UpdatedAt
         {
-            public string previous { get; set; }
-            public string current { get; set; }
+            /// <summary>
+            /// 
+            /// </summary>
+            [JsonProperty("previous")]
+            public string Previous { get; set; }
+
+            /// <summary>
+            /// 
+            /// </summary>
+            [JsonProperty("current")]
+            public string Current { get; set; }
         }
 
         public class Labels
         {
-            public Previou[] previous { get; set; }
-            public Current[] current { get; set; }
+            /// <summary>
+            /// 
+            /// </summary>
+            [JsonProperty("previous")]
+            public Previou[] Previous { get; set; }
+
+            /// <summary>
+            /// 
+            /// </summary>
+            [JsonProperty("current")]
+            public Current[] Current { get; set; }
         }
 
-        public class Previou
+        public class Previou : Label
         {
-            public int? id { get; set; }
-            public string title { get; set; }
-            public string color { get; set; }
-            public int? project_id { get; set; }
-            public string created_at { get; set; }
-            public string updated_at { get; set; }
-            public bool? template { get; set; }
-            public string description { get; set; }
-            public string type { get; set; }
-            public int? group_id { get; set; }
         }
 
-        public class Current
+        public class Current : Label
         {
-            public int? id { get; set; }
-            public string title { get; set; }
-            public string color { get; set; }
-            public int? project_id { get; set; }
-            public string created_at { get; set; }
-            public string updated_at { get; set; }
-            public bool? template { get; set; }
-            public string description { get; set; }
-            public string type { get; set; }
-            public int? group_id { get; set; }
         }
 
         public class Label
         {
-            public int? id { get; set; }
-            public string title { get; set; }
-            public string color { get; set; }
-            public int? project_id { get; set; }
-            public string created_at { get; set; }
-            public string updated_at { get; set; }
-            public bool? template { get; set; }
-            public string description { get; set; }
-            public string type { get; set; }
-            public int? group_id { get; set; }
+            /// <summary>
+            /// 
+            /// </summary>
+            [JsonProperty("id")]
+            public int? Id { get; set; }
+
+            /// <summary>
+            /// 
+            /// </summary>
+            [JsonProperty("title")]
+            public string Title { get; set; }
+
+            /// <summary>
+            /// 
+            /// </summary>
+            [JsonProperty("color")]
+            public string Color { get; set; }
+
+            /// <summary>
+            /// 
+            /// </summary>
+            [JsonProperty("project_id")]
+            public int? ProjectId { get; set; }
+
+            /// <summary>
+            /// 
+            /// </summary>
+            [JsonProperty("created_at")]
+            public string CreatedAt { get; set; }
+
+            /// <summary>
+            /// 
+            /// </summary>
+            [JsonProperty("updated_at")]
+            public string UpdatedAt { get; set; }
+
+            /// <summary>
+            /// 
+            /// </summary>
+            [JsonProperty("template")]
+            public bool? Template { get; set; }
+
+            /// <summary>
+            /// 
+            /// </summary>
+            [JsonProperty("description")]
+            public string Description { get; set; }
+
+            /// <summary>
+            /// 
+            /// </summary>
+            [JsonProperty("type")]
+            public string Type { get; set; }
+
+            /// <summary>
+            /// 
+            /// </summary>
+            [JsonProperty("group_id")]
+            public int? GroupId { get; set; }
         }
-
-
-
     }
 }

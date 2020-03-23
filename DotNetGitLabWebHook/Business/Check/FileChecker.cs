@@ -14,8 +14,8 @@ namespace DotNetGitLabWebHookToMatterMost.Business.Check
 
         public void Check(GitLabMergeRequest gitLabMergeRequest)
         {
-            var repositoryUrl = gitLabMergeRequest.RawProperty.repository.url;
-            var repoFolder = RepoManager.GetRepo(repositoryUrl, gitLabMergeRequest.RawProperty.repository.name);
+            var repositoryUrl = gitLabMergeRequest.RawProperty.Repository.Url;
+            var repoFolder = RepoManager.GetRepo(repositoryUrl, gitLabMergeRequest.RawProperty.Repository.Name);
 
             var git = new Git(repoFolder);
 
