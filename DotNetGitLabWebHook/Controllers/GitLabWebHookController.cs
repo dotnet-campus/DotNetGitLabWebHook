@@ -1,5 +1,4 @@
-﻿using DotNetGitLabWebHook.Model;
-using DotNetGitLabWebHookToMatterMost.Business;
+﻿using DotNetGitLabWebHookToMatterMost.Business;
 using DotNetGitLabWebHookToMatterMost.Model;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -33,7 +32,7 @@ namespace DotNetGitLabWebHookToMatterMost.Controllers
             var rootobject =
                 JsonConvert.DeserializeObject<GitLabMergeRequest.Rootobject>(str);
 
-            if (rootobject.object_kind == "merge_request")
+            if (rootobject.ObjectKind == "merge_request")
             {
                 var gitLabMergeRequest = _gitLabMergeRequestProvider.ParseGitLabMergeRequest(rootobject);
                 GitLabMrCheckerFlow.AddToCheck(gitLabMergeRequest);

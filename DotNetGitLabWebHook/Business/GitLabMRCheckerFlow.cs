@@ -1,5 +1,4 @@
-﻿using DotNetGitLabWebHook.Model;
-using DotNetGitLabWebHookToMatterMost.Business.Check;
+﻿using DotNetGitLabWebHookToMatterMost.Business.Check;
 using DotNetGitLabWebHookToMatterMost.Model;
 using Microsoft.Extensions.Configuration;
 
