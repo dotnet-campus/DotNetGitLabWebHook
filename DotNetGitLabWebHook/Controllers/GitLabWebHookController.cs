@@ -1,5 +1,4 @@
-﻿using DotNetGitLabWebHook.Model;
-using DotNetGitLabWebHookToMatterMost.Business;
+﻿using DotNetGitLabWebHookToMatterMost.Business;
 using DotNetGitLabWebHookToMatterMost.Model;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -11,13 +10,16 @@ namespace DotNetGitLabWebHookToMatterMost.Controllers
     [Route("[controller]")]
     public class GitLabWebHookController : ControllerBase
     {
+        private readonly GitLabMergeRequestProvider _gitLabMergeRequestProvider;
         public GitLabMRCheckerFlow GitLabMrCheckerFlow { get; }
 
         /// <inheritdoc />
-        public GitLabWebHookController(GitLabMRCheckerFlow gitLabMrCheckerFlow)
+        public GitLabWebHookController(GitLabMRCheckerFlow gitLabMrCheckerFlow, GitLabMergeRequestProvider gitLabMergeRequestProvider)
         {
+            _gitLabMergeRequestProvider = gitLabMergeRequestProvider;
             GitLabMrCheckerFlow = gitLabMrCheckerFlow;
         }
+
 
         [HttpPost]
         [Route("MergeRequest")]
@@ -30,38 +32,9 @@ namespace DotNetGitLabWebHookToMatterMost.Controllers
             var rootobject =
                 JsonConvert.DeserializeObject<GitLabMergeRequest.Rootobject>(str);
 
-            if (rootobject.object_kind == "merge_request")
+            if (rootobject.ObjectKind == "merge_request")
             {
-                var objectAttributes = rootobject.object_attributes;
-
-                var sourceGitSshUrl = objectAttributes.source.git_ssh_url;
-                var sourceBranch = objectAttributes.source_branch;
-
-                // 最后提交号
-                var lastCommitId = objectAttributes.last_commit.id;
-
-                var targetGitSshUrl = objectAttributes.target.git_ssh_url;
-                var targetBranch = objectAttributes.target_branch;
-
-                // MR 标题
-                var title = objectAttributes.title;
-
-                var username = rootobject.user.username;
-                var mergeRequestUrl = objectAttributes.url;
-
-                var gitLabMergeRequest = new GitLabMergeRequest
-                {
-                    RawProperty = rootobject,
-                    CommonProperty = new GitLabMergeRequest.MergeRequestProperty(sourceGitSshUrl,
-                        sourceBranch,
-                        lastCommitId,
-                        targetGitSshUrl,
-                        targetBranch,
-                        title,
-                        username,
-                        mergeRequestUrl)
-                };
-
+                var gitLabMergeRequest = _gitLabMergeRequestProvider.ParseGitLabMergeRequest(rootobject);
                 GitLabMrCheckerFlow.AddToCheck(gitLabMergeRequest);
                 return Ok();
             }

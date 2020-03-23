@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using DotNetGitLabWebHookToMatterMost.Business;
+using DotNetGitLabWebHookToMatterMost.Business.Check;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -25,12 +26,15 @@ namespace DotNetGitLabWebHook
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSingleton<RepoManager>();
+
             services.AddControllers();
 
-            services.AddScoped<GitLabMRCheckerFlow>();
-            services.AddScoped<FileChecker>();
+            services.AddTransient<GitLabMergeRequestProvider>();
 
-            services.AddTransient<Notify>();
+            services.AddScoped<GitLabMRCheckerFlow>();
+            services.AddScoped<Notify>();
+            services.AddScoped<FileChecker>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
