@@ -29,6 +29,9 @@ namespace DotNetGitLabWebHook
             services.AddSingleton<RepoManager>();
 
             services.AddControllers();
+
+            services.AddTransient<GitLabMergeRequestProvider>();
+
             services.AddScoped<GitLabMRCheckerFlow>();
             services.AddScoped<Notify>();
             services.AddScoped<FileChecker>();

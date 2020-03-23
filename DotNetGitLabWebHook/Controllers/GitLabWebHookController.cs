@@ -10,15 +10,17 @@ namespace DotNetGitLabWebHookToMatterMost.Controllers
     [Route("[controller]")]
     public class GitLabWebHookController : ControllerBase
     {
+        private readonly GitLabMergeRequestProvider _gitLabMergeRequestProvider;
         public GitLabMRCheckerFlow GitLabMrCheckerFlow { get; }
 
         /// <inheritdoc />
-        public GitLabWebHookController(GitLabMRCheckerFlow gitLabMrCheckerFlow)
+        public GitLabWebHookController(GitLabMRCheckerFlow gitLabMrCheckerFlow, GitLabMergeRequestProvider gitLabMergeRequestProvider)
         {
+            _gitLabMergeRequestProvider = gitLabMergeRequestProvider;
             GitLabMrCheckerFlow = gitLabMrCheckerFlow;
         }
 
-        
+
         [HttpPost]
         [Route("MergeRequest")]
         public IActionResult MergeRequest(object obj)
@@ -32,36 +34,7 @@ namespace DotNetGitLabWebHookToMatterMost.Controllers
 
             if (rootobject.ObjectKind == "merge_request")
             {
-                var objectAttributes = rootobject.ObjectAttributes;
-
-                var sourceGitSshUrl = objectAttributes.Source.GitSshUrl;
-                var sourceBranch = objectAttributes.SourceBranch;
-
-                // 最后提交号
-                var lastCommitId = objectAttributes.LastCommit.Id;
-
-                var targetGitSshUrl = objectAttributes.Target.GitSshUrl;
-                var targetBranch = objectAttributes.TargetBranch;
-
-                // MR 标题
-                var title = objectAttributes.Title;
-
-                var username = rootobject.User.Username;
-                var mergeRequestUrl = objectAttributes.Url;
-
-                var gitLabMergeRequest = new GitLabMergeRequest
-                {
-                    RawProperty = rootobject,
-                    CommonProperty = new GitLabMergeRequest.MergeRequestProperty(sourceGitSshUrl,
-                        sourceBranch,
-                        lastCommitId,
-                        targetGitSshUrl,
-                        targetBranch,
-                        title,
-                        username,
-                        mergeRequestUrl)
-                };
-
+                var gitLabMergeRequest = _gitLabMergeRequestProvider.ParseGitLabMergeRequest(rootobject);
                 GitLabMrCheckerFlow.AddToCheck(gitLabMergeRequest);
                 return Ok();
             }

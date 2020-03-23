@@ -3,6 +3,8 @@ using DotNetGitLabWebHookToMatterMost.Controllers;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.Design;
+using System.IO;
+using System.Linq;
 using System.Text;
 using DotNetGitLabWebHook;
 using DotNetGitLabWebHookToMatterMost.Business;
@@ -22,12 +24,13 @@ namespace DotNetGitLabWebHookToMatterMost.Controllers.Tests
             var hostBuilder = Program.CreateHostBuilder(new string[0]);
             var build = hostBuilder.Build();
             var serviceProvider = build.Services;
-            
+
             using (var scope = serviceProvider.CreateScope())
             {
                 var gitLabMrCheckerFlow = scope.ServiceProvider.GetService<GitLabMRCheckerFlow>();
+                var gitLabMergeRequestProvider = scope.ServiceProvider.GetService<GitLabMergeRequestProvider>();
 
-                var gitLabWebHookController = new GitLabWebHookController(gitLabMrCheckerFlow);
+                var gitLabWebHookController = new GitLabWebHookController(gitLabMrCheckerFlow, gitLabMergeRequestProvider);
                 gitLabWebHookController.MergeRequest(TestMRJson.GetObject());
             }
         }
